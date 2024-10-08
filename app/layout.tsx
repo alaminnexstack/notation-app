@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ConvexClientProvider } from "@/components/providers/convex-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Jotion',
-  description: 'The connected workspace where better, faster work happens.',
+  title: "Jotion",
+  description: "The connected workspace where better, faster work happens.",
   icons: {
     icon: [
       {
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
         media: "(prefers-color-scheme: dark)",
         url: "/logo-dark.svg",
         href: "/logo-dark.svg",
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -43,16 +44,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-              storageKey="jotion-theme-2"
-            >
-             
-              {children}
-            </ThemeProvider>
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            storageKey="jotion-theme-2"
+          >
+            {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
